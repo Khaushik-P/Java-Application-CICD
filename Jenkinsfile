@@ -28,5 +28,11 @@ pipeline{
                 sh 'mvn test'
             }
         }
+        stage('SonarQube Analysis') {
+          def mvn = tool 'Maven3';
+          withSonarQubeEnv() {
+            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=JAVA_CICD -Dsonar.projectName='JAVA_CICD'"
+          }
+        }
     }
 }
