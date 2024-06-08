@@ -64,5 +64,11 @@ pipeline{
                 }
             }
         }
+
+        stage("Trivy Image scan"){
+            steps{
+                sh 'trivy image khaushik/java-cicd:latest > trivyimage.txt'
+            }
+        }
     }
 }
