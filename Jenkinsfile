@@ -14,8 +14,18 @@ pipeline{
             }
         }
         stage("Git Checkout"){
-            script{
-                git branch: 'main',credentialsId: 'github',url: ''
+            steps{
+                git branch: 'main',credentialsId: 'github',url: 'https://github.com/Khaushik-P/Java-Application-CICD.git'
+            }
+        }
+        stage("Build Application"){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage("Test Application"){
+            steps{
+                sh 'mvn test'
             }
         }
     }
