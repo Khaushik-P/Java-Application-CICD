@@ -70,5 +70,13 @@ pipeline{
                 sh 'trivy image khaushik/java-cicd:latest > trivyimage.txt'
             }
         }
+       stage ('Cleanup Artifacts') {
+           steps {
+               script {
+                    sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker rmi ${IMAGE_NAME}:latest"
+               }
+          }
+       }
     }
 }
